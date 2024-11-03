@@ -9,11 +9,12 @@ export const ABI_TALENT=[
   "function markUsage(address _address) external returns (uint256)"
 ];
 
-export const KNOWLEDGE_PUBLISH="0x020eb43771854640c59109008b32dcfccd5df069";
+export const KNOWLEDGE_PUBLISH="0xa95799b35a9b71d8793ff8f160ac447b2ccb96f6";
 export const KNOWLEDGE_ABI = [
   "function setOwner() external returns (bool)",
   "function isRewardInProgress() external view returns (bool)",
   "function share(string calldata knowledge) external",
-  "function getSubmittedKnowledge() external view returns (string[] memory)",
-  "function reward(bool[] memory valids) external"
+  "function getSubmittedKnowledge() external view returns (address[] memory, string[] memory)",
+  "function getVote() external view returns (uint256)",
+  "function vote(uint256 index) external"
 ];

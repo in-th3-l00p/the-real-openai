@@ -32,6 +32,11 @@ const ChatPage: React.FC = () => {
       return;
     }
 
+    if (balance === 0n) {
+      setError('Insufficient balance to send message.');
+      return;
+    }
+
     setError('');
     setLoading(true);
 
@@ -50,7 +55,7 @@ const ChatPage: React.FC = () => {
         }),
       });
 
-      setBalance(balance => (balance ? balance - 1n : 0n))
+      setBalance((balance) => (balance ? balance - 1n : 0n));
       if (!response.ok) {
         const errorData = await response.json();
         const errorMessage = errorData.error || 'An error occurred. Please try again.';
@@ -87,51 +92,68 @@ const ChatPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full p-4">
-      {/* Chat History */}
-      <div className="flex-1 overflow-y-auto mb-4">
-        {chatHistory.map((message, index) => (
-          <div
-            key={index}
-            className={`mb-2 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}
-          >
+    <section className="bg-zinc-200 w-screen h-screen flex justify-center items-center">
+      <div className="flex flex-col w-full max-w-md h-[700px] bg-gradient-to-r from-purple-500 to-indigo-600 rounded-md mt-8 shadow-md">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 bg-white shadow-md">
+          <h1 className="text-2xl font-bold text-gray-800">AI Chat</h1>
+          <div className="text-gray-600">
+            Balance: {balance ? balance.toString() : '0'} Tokens
+          </div>
+        </div>
+
+        {/* Chat History */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {chatHistory.map((message, index) => (
             <div
-              className={`inline-block px-4 py-2 rounded-lg ${
-                message.sender === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-700 text-white'
+              key={index}
+              className={`flex mb-4 ${
+                message.sender === 'user' ? 'justify-end' : 'justify-start'
               }`}
             >
-              {message.content}
+              <div
+                className={`max-w-xs md:max-w-md px-4 py-2 rounded-lg shadow ${
+                  message.sender === 'user'
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-white text-gray-800'
+                }`}
+              >
+                {message.content}
+              </div>
             </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="px-4 py-2 bg-red-500 text-white text-center">
+            {error}
           </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+        )}
 
-      {/* Error Message */}
-      {error && <div className="text-red-500 mb-2">{error}</div>}
-
-      {/* Input Field */}
-      <div className="flex items-center">
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          className="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Type your message..."
-          disabled={!isAuthenticated || loading}
-        />
-        <button
-          onClick={handleSendMessage}
-          className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 disabled:opacity-50"
-          disabled={!isAuthenticated || loading || balance === 0n}
-        >
-          {loading ? 'Sending...' : 'Send'}
-        </button>
+        {/* Input Field */}
+        <div className="p-4 bg-white flex">
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Type your message..."
+            disabled={!isAuthenticated || loading}
+          />
+          <button
+            onClick={handleSendMessage}
+            className="bg-blue-500 text-white px-6 py-2 rounded-r-md hover:bg-blue-600 disabled:opacity-50"
+            disabled={!isAuthenticated || loading || balance === 0n}
+          >
+            {loading ? 'Sending...' : 'Send'}
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
+    
   );
 };
 
