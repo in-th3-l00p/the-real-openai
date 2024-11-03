@@ -93,7 +93,7 @@ export default function PurchasePage() {
   if (loading) return <p className="text-white text-xl">Loading...</p>;
 
   return (
-    <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-zinc-700 gap-8 text-white">
+    <div className="w-screen min-h-screen flex flex-col justify-center items-center gap-8">
       {isAuthenticated ? (
         <div className="flex flex-col items-center gap-4">
           <p>
@@ -103,7 +103,7 @@ export default function PurchasePage() {
             type="button"
             onClick={handlePurchase}
             disabled={purchasing}
-            className="px-4 py-2 bg-blue-500 rounded"
+            className="px-4 py-2 bg-blue-500 rounded text-white"
           >
             {purchasing ? "Purchasing..." : "Purchase Access"}
           </button>

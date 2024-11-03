@@ -81,8 +81,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (loading) return <p className="text-white text-xl">Loading...</p>;
 
   return (
-    <main className="w-screen min-h-screen flex justify-center items-center bg-zinc-700 gap-8">
-      <div className="absolute top-0 right-0 text-white p-4">
+    <main className="flex flex-col min-h-screen w-screen justify-center items-center">
+      <div className="absolute top-0 right-0 p-4">
         {isAuthenticated ? (
           <div className="flex flex-col items-end gap-2">
             <p>
