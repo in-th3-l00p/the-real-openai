@@ -7,7 +7,7 @@ In the 24 hours of the Arbitrum Stylus Hackathon, the three members of the team:
 * Web3 MNIST Classifier @ contracts/mnist-classifier/contract.sol, that uses the ai-dao/main.js script to load its weights to the blockchain
 * Web3 AI Training DAO @ contracts/ai-dao/Contrat4.sol
 * React Frontend for interacting with the calssifier @ sol-classifier
-* Stylus MNIST implementation, not functional because of Arbitrum Nitro code size limit @ contracts/mnist-rust (neural network feed forward implemented from scratch)
+* Stylus MNIST implementation, not functional because of Arbitrum Nitro code size limit @ contracts/mnist-stylus (neural network feed forward implemented from scratch)
 * Stylus LLM Knowledge Share Contract (permits the uploading of information for a LLM API found @ /mnist_api)
 * Stylus Token Authorization for AI API access (ai usage is purchased using this smart contract) @ contracts/api_authorization
 * Common AI algorithms api @ gpt_api & mnist_api
